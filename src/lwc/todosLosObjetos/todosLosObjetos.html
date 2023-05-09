@@ -1,0 +1,23 @@
+<template>
+    <lightning-card title="Conversor de moneda" icon-name="custom:custom19">
+        <lightning-combobox
+                label="Seleccionar moneda"
+                value={selectedCurrency}
+                options={targetCurrencies}
+                onchange={handleCurrencyChange}>
+        </lightning-combobox>
+
+        <lightning-button label="Convertir" onclick={convertCurrency} class="slds-m-top_small"></lightning-button>
+
+        <template if:true={isCurrencyAvailable}>
+            <template for:each={currencyData} for:item="data">
+                <p key={data.field}>
+                    {data.field}: {data.originalValue} ({selectedCurrency}) → {data.convertedValue} ({selectedCurrency})
+                </p>
+            </template>
+        </template>
+        <template if:false={isCurrencyAvailable}>
+            <p>Este objeto no tiene campos de tipo currency.</p>
+        </template>
+    </lightning-card>
+</template>
